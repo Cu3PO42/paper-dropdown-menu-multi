@@ -181,8 +181,7 @@ respectively.
          */
         selectedItemLabel: {
           type: String,
-          notify: true,
-          computed: '_computeSelectedItemLabel(selectedItem)'
+          notify: true
         },
 
         /**
@@ -193,7 +192,8 @@ respectively.
         selectedItem: {
           type: Object,
           notify: true,
-          readOnly: true
+          readOnly: true,
+          observer: '_computeSelectedItemLabel'
         },
 
         /**
@@ -324,8 +324,8 @@ respectively.
         if (!selectedItem) {
           return '';
         }
-
-        return selectedItem.label || selectedItem.textContent.trim();
+        
+        this.selectedItemLabel = selectedItem.label || selectedItem.textContent.trim();
       },
 
       /**
