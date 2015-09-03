@@ -1,9 +1,10 @@
 {
-  "name": "paper-dropdown-menu",
-  "version": "1.0.2",
+  "name": "paper-dropdown-menu-multi",
+  "version": "1.0.0",
   "description": "An element that works similarly to a native browser select",
   "authors": [
-    "The Polymer Authors"
+    "The Polymer Authors",
+    "Cu3PO42"
   ],
   "keywords": [
     "web-components",
@@ -16,10 +17,10 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/PolymerElements/paper-dropdown-menu"
+    "url": "git://github.com/Cu3PO42/paper-dropdown-menu-multi"
   },
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/PolymerElements/paper-dropdown-menu",
+  "homepage": "https://github.com/PolymerElements/paper-dropdown-menu-multi",
   "dependencies": {
     "polymer": "polymer/polymer#^1.0.0",
     "iron-a11y-keys-behavior": "polymerelements/iron-a11y-keys-behavior#^1.0.0",
