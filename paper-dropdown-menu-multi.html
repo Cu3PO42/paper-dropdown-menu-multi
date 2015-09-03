@@ -66,7 +66,7 @@ respectively.
 @demo demo/index.html
 -->
 
-<dom-module id="paper-dropdown-menu">
+<dom-module id="paper-dropdown-menu-multi">
   <style>
     :host {
       display: inline-block;
@@ -131,7 +131,10 @@ respectively.
       disabled="[[disabled]]"
       no-animations="[[noAnimations]]"
       on-iron-select="_onIronSelect"
-      opened="{{opened}}">
+      on-iron-deselect="_onIronSelect"
+      opened="{{opened}}"
+      ignore-select
+      ignore-activate>
       <div class="dropdown-trigger">
         <paper-ripple></paper-ripple>
         <paper-input
@@ -154,7 +157,7 @@ respectively.
     'use strict';
 
     Polymer({
-      is: 'paper-dropdown-menu',
+      is: 'paper-dropdown-menu-multi',
 
       /**
        * Fired when the dropdown opens.
@@ -268,8 +271,8 @@ respectively.
         // still in a `DocumentFragment`. This has the effect of causing
         // handlers not to fire. So, we double check this value on attached:
         var contentElement = this.contentElement;
-        if (contentElement && contentElement.selectedItem) {
-          this._setSelectedItem(contentElement.selectedItem);
+        if (contentElement && contentElement.selectedItems) {
+          this._setSelectedItem(contentElement.selectedItems);
         }
       },
 
@@ -300,7 +303,7 @@ respectively.
        * @param {CustomEvent} event An `iron-select` event.
        */
       _onIronSelect: function(event) {
-        this._setSelectedItem(event.detail.item);
+        this._computeSelectedItemLabel(this.contentElement.selectedItems);
       },
 
       /**
@@ -320,12 +323,14 @@ respectively.
        * @param {Element} selectedItem A selected Element item, with an
        * optional `label` property.
        */
-      _computeSelectedItemLabel: function(selectedItem) {
-        if (!selectedItem) {
+      _computeSelectedItemLabel: function(selectedItems) {
+        if (!selectedItems) {
           return '';
         }
-        
-        this.selectedItemLabel = selectedItem.label || selectedItem.textContent.trim();
+
+        this.selectedItemLabel = selectedItems.map(function(selectedItem) {
+            return selectedItem.label || selectedItem.textContent.trim();
+        }).join(', ');
       },
 
       /**
@@ -345,4 +350,3 @@ respectively.
     });
   })();
 </script>
-
